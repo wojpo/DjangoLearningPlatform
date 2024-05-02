@@ -1,16 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/loginpage.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <form method="post" autocomplete="off">
+    <form class="container neon-border" method="post" autocomplete="off">
         {% csrf_token %}
 
         {{ loginform.as_p }}
 
-        <input type="submit" value="Login"/>
+        <input class="login-button" type="submit" value="Login"/>
     </form>
 </body>
 </html>
