@@ -1,8 +1,10 @@
+
 body {
     background-color: black;
     margin: 0;
     overflow: hidden;
     font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -28,12 +30,13 @@ body {
     font-size: 3vh;
     text-align: center;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 10px;
     animation: fadeIn 3s ease forwards;
+    font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 .links:hover {

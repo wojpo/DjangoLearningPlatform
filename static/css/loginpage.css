@@ -1,47 +1,106 @@
-body {
-    background-color: black;
+/* Reset */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: black;
+    color: #fff;
     overflow: hidden;
-    font-size: 16px;
-    color: white;
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30vw;
-    height: 30vh;
-    padding: 20px;
-    background-color: transparent;
-    border-radius: 10px;
-    border: 10px solid transparent; /* Make sure to set a transparent border */
-    box-shadow: 0 0 200px #fff, /* White glow */
-                0 0 300px #00f, /* Blue glow */
-                0 0 400px #0f0, /* Green glow */
-                0 0 500px #f00; /* Red glow */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Display items horizontally */
+  width: 90%;
+  max-width: 400px;
+  margin: 30vh auto; /* Center container horizontally */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease forwards;
+
+  /* Apply Flexbox */
+  display: flex; /* Make the container a flex container */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically within the container */
+  align-items: center; /* Center items horizontally within the container */
+}
+
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+p {
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 1);
+    background: linear-gradient(to right, #dc3545 0%, #ffff00 100%); /* Creates a horizontal gradient from red to yellow */
+    -webkit-background-clip: text; /* Clips the gradient to the text content for some browsers */
+    background-clip: text; /* Clips the gradient to the text content for modern browsers */
+    -webkit-text-fill-color: transparent; /* Makes the text color transparent to show the gradient */
+
+}
+
+
+
+
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .login-button {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #38853d, #257219);
+    width: 45%;
+    padding: 10px;
     border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 3vh;
-    border-radius: 50px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: #d3490e;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0px 4px 15px rgb(35, 86, 38);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 6px 20px rgb(32, 77, 37);
+    background-color: #621008;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 50%;
+    }
 }
