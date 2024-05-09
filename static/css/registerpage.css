@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 400px;
+    margin: 20vh auto;
+    background-color: #000; /* Black container background color */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: -moz-center;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -20%);
+
+}
+
+label {
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 1);
+    background: linear-gradient(to right, #dc3545 0%, #ffff00 100%); /* Creates a horizontal gradient from red to yellow */
+    -webkit-background-clip: text; /* Clips the gradient to the text content for some browsers */
+    background-clip: text; /* Clips the gradient to the text content for modern browsers */
+    -webkit-text-fill-color: transparent; /* Makes the text color transparent to show the gradient */
+
+}
+
+
+
+.btn {
+    width: 45%;
+    padding: 10px;
+    border: none;
+    margin: 20px auto 0; /* Center the button horizontally */
+    display: block; /* Ensure the button takes up the full width */
+    border-radius: 8px;
+    background: #d3490e;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #621008;
+}
+
+ul{
+
+    font-size: 11px;
+    text-align: justify;
+
+}
+li{
+    margin-bottom: 8px;
+    color: #f55423;
+
+
+}
+#id_username_helptext{
+    display: none;
+}
+
+span{
+    color: #f55423;
+}
+
+input{
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+@media screen and (max-width: 480px) {
+    input{
+        font-size: 9px;
+    }
+    ul{
+        font-size: 10px;
+    }
+    span{
+
+        font-size: 14px;
+    }
+}

@@ -19,8 +19,6 @@ body {
   margin: 30vh auto; /* Center container horizontally */
   padding: 20px;
   background: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   animation: slideIn 0.5s ease forwards;
 
   /* Apply Flexbox */
@@ -54,26 +52,27 @@ p {
 }
 
 
-
-
-
-input[type="text"],
-input[type="password"] {
+input{
+    color: white !important;
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: none;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
-    color: #fff;
     font-size: 16px;
     transition: background 0.3s ease;
+    -webkit-text-fill-color: white;
+
+
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
+input:focus {
     background: rgba(255, 255, 255, 0.3);
 }
+
+
+
 
 .login-button {
     width: 45%;
@@ -92,6 +91,12 @@ input[type="password"]:focus {
     background-color: #621008;
 }
 
+li{
+    margin-bottom: 15px;
+    text-align: center;
+    color: gold;
+    list-style: none;
+}
 /* Responsive Styles */
 @media (min-width: 768px) {
     .container {
