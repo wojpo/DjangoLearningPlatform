@@ -6,11 +6,22 @@ from django.shortcuts import render, redirect
 from .forms import UserForm, LoginForm
 
 
-# Create your views here.
+# decorator that checks if user is logged if is redirect to different page
+def redirect_authenticated_users(view_func):
+    def wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('already_logged')
+        return view_func(request, *args, **kwargs)
+
+    return wrapped_view
+
+
+@redirect_authenticated_users
 def home(request):
     return render(request, 'index.html')
 
 
+@redirect_authenticated_users
 def register(request):
     form = UserForm()
     if request.method == 'POST':
@@ -23,6 +34,11 @@ def register(request):
     return render(request, 'register.html', context=context)
 
 
+def already_logged(request):
+    return render(request, 'already_logged_in.html')
+
+
+@redirect_authenticated_users
 def login_page(request):
     form = LoginForm()
     if request.method == 'POST':
