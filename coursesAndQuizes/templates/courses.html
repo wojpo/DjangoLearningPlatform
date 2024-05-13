@@ -10,13 +10,13 @@
         let completedUncompletedCounter
     </script>
 
-    {% for cours in courses %}
+    {% for course in courses %}
         <script>
             complessons = 0;
         </script>
-        <a href={% url 'course-detail' pk=cours.pk%}>{{ cours.name }}</a>
+        <a href={% url 'course-detail' pk=course.pk%}>{{ course.name }}</a>
 
-        {% for lesson in cours.lesson_set.all %}
+        {% for lesson in course.lesson_set.all %}
             {% for key,value in if_completed.items %}
                 {% if key == lesson.pk %}
                     <script>
@@ -25,17 +25,17 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
-            <p id="comp/uncomp{{ cours.pk }}"></p>
+            <p id="comp/uncomp{{ course.pk }}"></p>
 
             <script>
-                completedUncompletedCounter = document.getElementById("comp/uncomp{{ cours.pk }}");
-                if (complessons === {{ cours.lesson_set.all.count }})
+                completedUncompletedCounter = document.getElementById("comp/uncomp{{ course.pk }}");
+                if (complessons === {{ course.lesson_set.all.count }})
                 {
                     completedUncompletedCounter.textContent = 'Completed'
                 }
                 else
                 {
-                    completedUncompletedCounter.textContent = complessons+'/{{ cours.lesson_set.all.count }}';
+                    completedUncompletedCounter.textContent = complessons+'/{{ course.lesson_set.all.count }}';
                 }
                 console.log(complessons)
             </script>

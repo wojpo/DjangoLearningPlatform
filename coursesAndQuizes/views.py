@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 
-from .models import Course, Lesson, UserLesson
+from .models import Course, Lesson, UserLesson, SubLesson
 from django.views.generic import DetailView
 
 
@@ -31,8 +31,9 @@ class LessonDetailView(DetailView):
             completed = user_lesson.completed
         except UserLesson.DoesNotExist:
             completed = False
+        subLessons = SubLesson.objects.filter(lesson=lesson)
 
-        return render(request, 'lesson.html', {'lesson': lesson, 'completed': completed})
+        return render(request, 'lesson.html', {'lesson': lesson, 'completed': completed, 'sublessons': subLessons})
 
 
 @login_required(login_url='/loginpage')

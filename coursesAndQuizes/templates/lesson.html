@@ -8,15 +8,18 @@
 <body>
     <h1>{{ lesson.title }}</h1>
     <p>{{ lesson.content }}</p>
+    {% for sublesson in sublessons %}
+        <h2>{{ sublesson.title }}</h2>
+        <p>{{ sublesson.content }}</p>
+    {% endfor %}
     {% if completed %}
         <p>This lesson is completed!</p>
     {% else %}
         <p>uncompleted</p>
         <form method="post" action="{% url 'mark_lesson_complete' lesson.id %}">
-        {% csrf_token %}
-        <button type="submit">Mark as Completed</button>
-    </form>
+            {% csrf_token %}
+            <button type="submit">Mark as Completed</button>
+        </form>
     {% endif %}
-    <!-- Other lesson details -->
 </body>
 </html>

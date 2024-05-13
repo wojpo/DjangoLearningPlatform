@@ -11,9 +11,7 @@
 <body>
     <form class="container" method="post" autocomplete="off">
         {% csrf_token %}
-
         {{ loginform.as_p }}
-
         <input class="login-button" type="submit" value="Login"/>
     </form>
 </body>
