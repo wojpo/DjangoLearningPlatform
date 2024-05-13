@@ -37,7 +37,16 @@ class LessonDetailView(DetailView):
 
 @login_required(login_url='/loginpage')
 def courses(request):
-    return render(request, 'courses.html')
+    all_courses = Course.objects.all()
+    if_user_completed = {}
+    user = request.user
+    for course in all_courses:
+        for lesson in course.lesson_set.all():
+            if UserLesson.objects.filter(user=user, lesson=lesson).exists():
+                UwU = UserLesson.objects.get(user=user, lesson=lesson)
+                if_user_completed[lesson.pk] = UwU.completed
+
+    return render(request, 'courses.html', {'courses': all_courses, 'if_completed': if_user_completed})
 
 
 @login_required(login_url='/loginpage')

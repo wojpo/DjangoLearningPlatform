@@ -5,6 +5,41 @@
     <title>courses</title>
 </head>
 <body>
-<p>courses</p>
+    <script>
+        let complessons
+        let completedUncompletedCounter
+    </script>
+
+    {% for cours in courses %}
+        <script>
+            complessons = 0;
+        </script>
+        <a href={% url 'course-detail' pk=cours.pk%}>{{ cours.name }}</a>
+
+        {% for lesson in cours.lesson_set.all %}
+            {% for key,value in if_completed.items %}
+                {% if key == lesson.pk %}
+                    <script>
+                        complessons++;
+                    </script>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+            <p id="comp/uncomp{{ cours.pk }}"></p>
+
+            <script>
+                completedUncompletedCounter = document.getElementById("comp/uncomp{{ cours.pk }}");
+                if (complessons === {{ cours.lesson_set.all.count }})
+                {
+                    completedUncompletedCounter.textContent = 'Completed'
+                }
+                else
+                {
+                    completedUncompletedCounter.textContent = complessons+'/{{ cours.lesson_set.all.count }}';
+                }
+                console.log(complessons)
+            </script>
+    {% endfor %}
+
 </body>
 </html>
