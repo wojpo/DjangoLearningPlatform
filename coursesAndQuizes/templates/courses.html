@@ -1,45 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>courses</title>
+
+    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/courses.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+
 </head>
 <body>
-    <script>
-        let complessons
-        let completedUncompletedCounter
-    </script>
-
-    {% for course in courses %}
-        <script>
-            complessons = 0;
-        </script>
-        <a href={% url 'course-detail' pk=course.pk%}>{{ course.name }}</a>
-
-        {% for lesson in course.lesson_set.all %}
-            {% for key,value in if_completed.items %}
-                {% if key == lesson.pk %}
-                    <script>
-                        complessons++;
-                    </script>
-                {% endif %}
-            {% endfor %}
+    <div class="course-container">
+        {% for course in courses %}
+            <div class="course">
+                <a href="{% url 'course-detail' pk=course.pk %}">{{ course.name }}</a>
+                <p id="comp-uncomp-{{ course.pk }}" class="status"></p>
+                <div id="progress-circle-{{ course.pk }}" class="progress-circle"></div>
+            </div>
         {% endfor %}
-            <p id="comp/uncomp{{ course.pk }}"></p>
+    </div>
 
-            <script>
-                completedUncompletedCounter = document.getElementById("comp/uncomp{{ course.pk }}");
-                if (complessons === {{ course.lesson_set.all.count }})
-                {
-                    completedUncompletedCounter.textContent = 'Completed'
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let complessons;
+            let completedUncompletedCounter;
+            let progressCircle
+            let progression
+            {% for course in courses %}
+                complessons = 0;
+                {% for lesson in course.lesson_set.all %}
+                    {% for key, value in if_completed.items %}
+                        {% if key == lesson.pk %}
+                            complessons++;
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                progression = ((complessons / {{ course.lesson_set.all.count }}) * 100).toFixed(0);
+                completedUncompletedCounter = document.getElementById("comp-uncomp-{{ course.pk }}");
+                if (complessons === {{ course.lesson_set.all.count }}) {
+                    completedUncompletedCounter.textContent = `${progression}% Completed`;
+                } else {
+                    completedUncompletedCounter.textContent = `${progression}% Completed`;
                 }
-                else
-                {
-                    completedUncompletedCounter.textContent = complessons+'/{{ course.lesson_set.all.count }}';
-                }
-                console.log(complessons)
-            </script>
-    {% endfor %}
-
+                progressCircle =  document.getElementById('progress-circle-{{ course.pk }}')
+                progressCircle.style.background =  `conic-gradient(#324927 ${100 - progression}%, #5e9447 ${100 - progression}% 100%)`;
+            {% endfor %}
+        });
+    </script>
 </body>
 </html>
