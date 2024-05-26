@@ -37,11 +37,7 @@
                 {% endfor %}
                 progression = ((complessons / {{ course.lesson_set.all.count }}) * 100).toFixed(0);
                 completedUncompletedCounter = document.getElementById("comp-uncomp-{{ course.pk }}");
-                if (complessons === {{ course.lesson_set.all.count }}) {
-                    completedUncompletedCounter.textContent = `${progression}% Completed`;
-                } else {
-                    completedUncompletedCounter.textContent = `${progression}% Completed`;
-                }
+                completedUncompletedCounter.textContent = `${progression}% Completed`;
                 progressCircle =  document.getElementById('progress-circle-{{ course.pk }}')
                 progressCircle.style.background =  `conic-gradient(#324927 ${100 - progression}%, #5e9447 ${100 - progression}% 100%)`;
             {% endfor %}

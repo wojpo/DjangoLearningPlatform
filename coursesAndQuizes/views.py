@@ -13,8 +13,9 @@ class CourseDetailView(DetailView):
     def get(self, request, pk):
         course = get_object_or_404(Course, pk=pk)
         lessons = Lesson.objects.filter(course=course)
+        if_completed = UserLesson.objects.filter(lesson__course=course)
         lessons_num = len(lessons)
-        return render(request, 'course.html', {'course': course, 'lessons': lessons, 'lessons_count': lessons_num})
+        return render(request, 'course.html', {'course': course, 'lessons': lessons, 'lessons_count': lessons_num,'if_completed': if_completed})
 
 
 class LessonDetailView(DetailView):

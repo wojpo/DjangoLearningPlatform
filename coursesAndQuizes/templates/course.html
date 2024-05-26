@@ -1,17 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ course.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/course.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
     <h1>{{ course.name }}</h1>
     <p>{{ course.description }}</p>
-    <p>{{ lessons_count }}</p>
     <ul>
     {% for lesson in lessons %}
-        <li><a href="{% url 'lesson-detail' course_pk=course.pk pk=lesson.pk %}">{{ lesson.title }}</a></li>
+        <li><a href="{% url 'lesson-detail' course_pk=course.pk pk=lesson.pk %}">{{ lesson.title }}<span class="non-visible" id="{{ lesson.pk }}">(completed)</span></a></li>
+        {% for foo in if_completed %}
+            {% if foo.lesson.pk == lesson.pk %}
+                <script>
+                    document.getElementById({{ lesson.pk }}).style.display = 'block';
+
+                </script>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
+
     </ul>
 
 </body>
