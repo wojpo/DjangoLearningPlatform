@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Results</title>
+</head>
+<body>
+<h1>Results for {{ result.quiz.title }}</h1>
+<p>You got {{ result.correctAnswers }} out of {{ result.quiz.subquiz_set.count }} correct.</p>
+</body>
+</html>

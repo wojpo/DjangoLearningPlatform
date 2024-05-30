@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+<h1>{{ quiz.title }}</h1>
+<p>{{ quiz.description }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Start Quiz</button>
+</form>
+<ul>
+{% for subquiz in sub_quizzes %}
+    <li>{{ subquiz.question }}</li>
+{% endfor %}
+</ul>
+
+
+</body>
+</html>

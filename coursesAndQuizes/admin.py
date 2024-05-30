@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Lesson, UserLesson, SubLesson, Quiz, SubQuiz, Answer
+from .models import Course, Lesson, UserLesson, SubLesson, Quiz, SubQuiz, Answer, QuizResults
 
 # Register your models here.
 
@@ -11,3 +11,4 @@ admin.site.register(SubLesson)
 admin.site.register(Quiz)
 admin.site.register(SubQuiz)
 admin.site.register(Answer)
+admin.site.register(QuizResults)

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+<h1>{{ subquiz.question }}</h1>
+<form action="{% url 'vote' subquiz.quiz.pk subquiz.pk %}" method="post">
+{% csrf_token %}
+{% for answer in answers %}
+    <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}">
+    <label for="answer{{ forloop.counter }}">{{ answer.answer }}</label><br>
+{% endfor %}
+<input type="submit" value="Submit">
+</form>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+</body>
+</html>
