@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/quizes.css' %}">
+
+    <title>Quiz Results</title>
+</head>
+<body>
+
+    <div class="quiz-container">
+        {% for quiz in quizes %}
+            <div class="quiz">
+                <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+</body>
+</html>
