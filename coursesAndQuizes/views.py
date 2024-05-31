@@ -81,6 +81,12 @@ def courses(request):
 
 
 @login_required(login_url='/loginpage')
+def quizes(request):
+    all_quizes = Quiz.objects.all()
+    return render(request, 'quizes.html', {'quizes': all_quizes})
+
+
+@login_required(login_url='/loginpage')
 def vote(request, quiz_pk, pk):
     subquiz = get_object_or_404(SubQuiz, pk=pk, quiz_id=quiz_pk)
     quiz = get_object_or_404(Quiz, pk=quiz_pk)

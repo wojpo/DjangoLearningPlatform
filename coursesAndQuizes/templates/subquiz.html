@@ -1,10 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/subquiz.css' %}">
     <title>Quiz</title>
 </head>
 <body>
+<div class="container">
 <h1>{{ subquiz.question }}</h1>
 <form action="{% url 'vote' subquiz.quiz.pk subquiz.pk %}" method="post">
 {% csrf_token %}
@@ -14,8 +18,11 @@
 {% endfor %}
 <input type="submit" value="Submit">
 </form>
+</div>
 {% if error_message %}
+    <div class="error-message">
     <p><strong>{{ error_message }}</strong></p>
+    </div>
 {% endif %}
 </body>
 </html>
