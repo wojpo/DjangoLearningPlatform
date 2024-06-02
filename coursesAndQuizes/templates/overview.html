@@ -9,16 +9,27 @@
     <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/overview.css' %}">
 </head>
 <body>
+<a href="{% url 'courses' %}"><p class="count">Click here to see {{ courses_count }} more courses </p></a>
 <div class="course-container">
-    <a href="{% url 'courses' %}"><p class="count">Click here to see {{ courses_count }} more courses </p></a>
     {% for course in courses %}
-        <a href="{% url 'course-detail' course.pk %}">{{ course.name }}</a>
+        <a href="{% url 'course-detail' course.pk %}">
+        <div class="course">
+            <p><strong>{{ course.name }}</strong></p>
+            <p>{{ course.description }}</p>
+
+        </div>
+        </a>
     {% endfor %}
 </div>
+<a href="{% url 'quizes' %}"><p class="count">Click here to see {{ quizes_count }} more quizes</p></a>
 <div class="quiz-container">
-    <a href="{% url 'quizes' %}"><p class="count">Click here to see {{ quizes_count }} more quizes</p></a>
     {% for quiz in quizes %}
-        <a href="{% url 'quiz-detail' quiz.pk %}">{{ quiz.title }}</a>
+        <a href="{% url 'quiz-detail' quiz.pk %}">
+        <div class="course">
+            <p><strong>{ quiz.title }}</strong></p>
+            <p>{{ quiz.description }}</p>
+        </div>
+        </a>
     {% endfor %}
 </div>
 </body>
