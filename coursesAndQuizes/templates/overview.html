@@ -10,13 +10,13 @@
 </head>
 <body>
 <div class="course-container">
-    <p class="count">{{ courses_count }}</p>
+    <a href="{% url 'courses' %}"><p class="count">Click here to see {{ courses_count }} more courses </p></a>
     {% for course in courses %}
         <a href="{% url 'course-detail' course.pk %}">{{ course.name }}</a>
     {% endfor %}
 </div>
 <div class="quiz-container">
-    <p class="count">{{ quizes_count }}</p>
+    <a href="{% url 'quizes' %}"><p class="count">Click here to see {{ quizes_count }} more quizes</p></a>
     {% for quiz in quizes %}
         <a href="{% url 'quiz-detail' quiz.pk %}">{{ quiz.title }}</a>
     {% endfor %}
