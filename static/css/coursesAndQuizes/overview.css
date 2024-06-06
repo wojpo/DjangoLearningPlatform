@@ -1,0 +1,72 @@
+/* overview.css */
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #1E90FF; /* DodgerBlue for links */
+}
+
+a:hover {
+    color: #00BFFF; /* DeepSkyBlue when hovering */
+}
+
+.count {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+}
+h2{
+    text-align: center;
+    margin: 20px 0;
+    font-size: 36px;
+    padding: 30px;
+    color: #13d0b4;
+
+}
+.course-container, .quiz-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-evenly;
+
+}
+
+.course, .quiz {
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    height: auto;
+
+}
+
+.course:hover, .quiz:hover {
+    transform: scale(1.05);
+}
+
+.course p, .quiz p {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.course p strong, .quiz p strong {
+    font-size: 20px;
+}
+
+@media (max-width: 600px) {
+    .course-container, .quiz-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+}

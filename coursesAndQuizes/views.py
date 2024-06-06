@@ -8,6 +8,17 @@ from .models import Course, Lesson, UserLesson, SubLesson, Quiz, SubQuiz, Answer
 from django.views.generic import DetailView
 
 
+@login_required(login_url='/loginpage')
+def overview(request):
+    cour = Course.objects.all()[:5]
+    quiz = Quiz.objects.all()[:5]
+    courc = Course.objects.count()
+    quizc = Quiz.objects.count()
+
+    return render(request, 'overview.html',
+                  {'courses': cour, 'quizes': quiz, 'courses_count': courc, 'quizes_count': quizc})
+
+
 class CourseDetailView(DetailView):
     @method_decorator(login_required(login_url='/loginpage'))
     def get(self, request, pk):
@@ -15,6 +26,7 @@ class CourseDetailView(DetailView):
         lessons = Lesson.objects.filter(course=course)
         if_completed = UserLesson.objects.filter(lesson__course=course)
         lessons_num = len(lessons)
+
         return render(request, 'course.html', {'course': course, 'lessons': lessons, 'lessons_count': lessons_num,
                                                'if_completed': if_completed})
 
@@ -43,6 +55,7 @@ class QuizDetailView(DetailView):
     def get(self, request, pk):
         quiz = get_object_or_404(Quiz, pk=pk)
         subquizes = SubQuiz.objects.filter(quiz=quiz)
+
         return render(request, 'quiz.html', {'quiz': quiz, 'subquizes': subquizes})
 
     @method_decorator(login_required(login_url='/loginpage'))
@@ -52,6 +65,7 @@ class QuizDetailView(DetailView):
         request.session['current_question'] = 0
         request.session['correct_answers'] = 0
         first_subquiz = SubQuiz.objects.filter(quiz=quiz).first()
+
         if first_subquiz:
             return redirect('subquiz-detail', quiz_pk=quiz.id, pk=first_subquiz.id)
         else:
@@ -63,6 +77,7 @@ class SubQuizDetailView(DetailView):
     def get(self, request, quiz_pk, pk):
         subquiz = get_object_or_404(SubQuiz, pk=pk)
         answers = Answer.objects.filter(subQuiz=subquiz)
+
         return render(request, 'subquiz.html', {'subquiz': subquiz, 'answers': answers})
 
 
@@ -124,6 +139,7 @@ def quiz_results(request, quiz_pk):
     correct_answers = request.session.get('correct_answers', 0)
     result = QuizResults(quiz=quiz, user=request.user, correctAnswers=correct_answers)
     result.save()
+
     return render(request, 'result.html', {'result': result})
 
 
@@ -133,4 +149,5 @@ def mark_lesson_complete(request, lesson_id):
     user = request.user
     UserLesson.objects.get_or_create(user=user, lesson=lesson, defaults={'completed': True})
     course_id = lesson.course.id
+
     return HttpResponseRedirect(reverse('course-detail', args=[course_id]))
