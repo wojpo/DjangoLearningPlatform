@@ -1,17 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+	Register
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="{% static 'css/usersys/registerpage.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+{% block stylesheet %}
+	<link rel="stylesheet" href="{% static 'css/usersys/registerpage.css' %}">
+{% endblock %}
+{% block body %}
     <form class="container" method="post" autocomplete="off">
         {% csrf_token %}
         {{ registration_form.as_table }}
         <input class="btn" type="submit" value="Register"/>
     </form>
-</body>
-</html>
+{% endblock %}
+
+
+

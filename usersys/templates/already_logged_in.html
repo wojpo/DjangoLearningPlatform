@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>already_logged_in</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+	already_logged_in
+{% endblock %}
+{% block body %}
     <p>You're already logged in press button to log out</p>
     <a href="{% url 'logout' %}">LOG OUT</a>
-</body>
-</html>
+{% endblock %}
