@@ -1,15 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+	Quiz Results
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/quizes.css' %}">
-
-    <title>Quiz Results</title>
-</head>
-<body>
-
+{% block stylesheet %}
+	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/quizes.css' %}">
+{% endblock %}
+{% block body %}
     <div class="quiz-container">
         {% for quiz in quizes %}
             <div class="quiz">
@@ -17,8 +14,7 @@
             </div>
         {% endfor %}
     </div>
+{% endblock %}
 
 
 
-</body>
-</html>

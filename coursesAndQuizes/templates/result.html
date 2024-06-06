@@ -1,17 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+	Quiz Results
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/result.css' %}">
-    <title>Quiz Results</title>
-</head>
-<body>
+{% block stylesheet %}
+	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/result.css' %}">
+{% endblock %}
+{% block body %}
 <div class="container">
     <h1>Results for {{ result.quiz.title }}</h1>
     <p>You got {{ result.correctAnswers }} out of {{ result.quiz.subquiz_set.count }} correct.</p>
     <a href="{% url "quiz-detail" result.quiz.pk %}">Go Back</a>
 </div>
-</body>
-</html>
+{% endblock %}

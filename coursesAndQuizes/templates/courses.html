@@ -1,15 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Courses
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-
+{% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/courses.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-
-</head>
-<body>
+{% endblock %}
+{% block body %}
     <div class="course-container">
         {% for course in courses %}
             <div class="course">
@@ -43,5 +40,5 @@
             {% endfor %}
         });
     </script>
-</body>
-</html>
+{% endblock %}
+

@@ -1,13 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ lesson.title }}
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/lesson.css' %}">
-    <title>{{ lesson.title }}</title>
-</head>
-<body>
+{% endblock %}
+{% block body %}
     <h1>{{ lesson.title }}</h1>
     <p>{{ lesson.content }}</p>
     {% for sublesson in sublessons %}
@@ -23,5 +22,6 @@
             <button type="submit">Mark as Completed</button>
         </form>
     {% endif %}
-</body>
-</html>
+{% endblock %}
+
+
