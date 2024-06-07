@@ -6,6 +6,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/usersys/loginpage.css' %}">
 {% endblock %}
+{% block navbar %}none{% endblock %}
 {% block body %}
     <form class="container" method="post" autocomplete="off">
         {% csrf_token %}
