@@ -11,6 +11,7 @@
         {% for course in courses %}
             <div class="course">
                 <a href="{% url 'course-detail' pk=course.pk %}">{{ course.name }}</a>
+                <p>{{ course.difficulty }}</p>
                 <p id="comp-uncomp-{{ course.pk }}" class="status"></p>
                 <div id="progress-circle-{{ course.pk }}" class="progress-circle"></div>
             </div>

@@ -13,7 +13,7 @@
         {% for course in courses %}
             <a href="{% url 'course-detail' course.pk %}">
             <div class="course">
-                <p><strong>{{ course.name }}</strong></p>
+                <p><strong>{{ course.name }}</strong><br>{{ course.difficulty }}</p>
             </div>
             </a>
         {% endfor %}
