@@ -6,6 +6,21 @@ class Course(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+    EASY = 'easy'
+    MEDIUM = 'medium'
+    HARD = 'hard'
+
+    DIFFICULTY_CHOICES = [
+        (EASY, 'Easy'),
+        (MEDIUM, 'Medium'),
+        (HARD, 'Hard'),
+    ]
+
+    difficulty = models.CharField(
+        max_length=6,
+        choices=DIFFICULTY_CHOICES,
+        default=EASY,
+    )
 
 
 class Lesson(models.Model):
