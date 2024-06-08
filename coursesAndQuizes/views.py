@@ -54,9 +54,10 @@ class QuizDetailView(DetailView):
     @method_decorator(login_required(login_url='/loginpage'))
     def get(self, request, pk):
         quiz = get_object_or_404(Quiz, pk=pk)
+        diff = quiz.difficulty
         subquizes = SubQuiz.objects.filter(quiz=quiz)
 
-        return render(request, 'quiz.html', {'quiz': quiz, 'subquizes': subquizes})
+        return render(request, 'quiz.html', {'quiz': quiz, 'subquizes': subquizes, 'difficulty': diff})
 
     @method_decorator(login_required(login_url='/loginpage'))
     def post(self, request, pk):
