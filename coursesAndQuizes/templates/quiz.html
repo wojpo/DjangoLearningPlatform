@@ -10,6 +10,7 @@
     <div class="container">
         <h1>{{ quiz.title }}</h1>
         <p>{{ quiz.description }}</p>
+        <p>{{ difficulty }}</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit">Start Quiz</button>

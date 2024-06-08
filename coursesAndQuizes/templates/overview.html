@@ -24,7 +24,7 @@
         {% for quiz in quizes %}
             <a href="{% url 'quiz-detail' quiz.pk %}">
             <div class="quiz">
-                <p><strong>{{ quiz.title }}</strong></p>
+                <p><strong>{{ quiz.title }}</strong><br>{{ quiz.difficulty }}</p>
             </div>
             </a>
         {% endfor %}

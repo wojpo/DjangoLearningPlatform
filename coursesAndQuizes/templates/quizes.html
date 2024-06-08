@@ -10,7 +10,7 @@
     <div class="quiz-container">
         {% for quiz in quizes %}
             <div class="quiz">
-                <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}</a>
+                <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}<br>{{ quiz.difficulty }}</a>
             </div>
         {% endfor %}
     </div>
