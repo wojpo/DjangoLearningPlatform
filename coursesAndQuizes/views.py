@@ -146,6 +146,14 @@ def quiz_results(request, quiz_pk):
 
 
 @login_required(login_url='/loginpage')
+def all_quiz_results(request):
+    user = request.user
+    results = QuizResults.objects.filter(user=user)
+
+    return render(request, 'results.html', {'results': results})
+
+
+@login_required(login_url='/loginpage')
 def mark_lesson_complete(request, lesson_id):
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     user = request.user
