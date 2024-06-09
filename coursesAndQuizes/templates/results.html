@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+	results
+{% endblock %}
+{% block body %}
+    {% for result in results %}
+        {{ result.quiz.title }}
+        {{ result.correctAnswers }}/{{ result.quiz.subquiz_set.count }}
+    {% endfor %}
+
+{% endblock %}
