@@ -1,33 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}
-	{{ course.name }}
+    {{ course.name }}
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/course.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 {% block body %}
-	<h1>{{ course.name }}</h1>
-    <p>{{ course.description }}</p>
-    <p>{{ difficulty }}</p>
-    <ul>
-    {% for lesson in lessons %}
-        <li><a href="{% url 'lesson-detail' course_pk=course.pk pk=lesson.pk %}">{{ lesson.title }}<span class="non-visible" id="{{ lesson.pk }}">(completed)</span></a></li>
-        {% for foo in if_completed %}
-            {% if foo.lesson.pk == lesson.pk %}
-                <script>
-                    document.getElementById({{ lesson.pk }}).style.display = 'block';
-
-                </script>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-    </ul>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4 text-white">{{ course.name }}</h1>
+            <p class="lead text-white">{{ course.description }}</p>
+            <p class="font-weight-bold text-white">{{ difficulty }}</p>
+            <ul class="list-group">
+                {% for lesson in lessons %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
+                        <a class="text-white" href="{% url 'lesson-detail' course_pk=course.pk pk=lesson.pk %}">{{ lesson.title }}</a>
+                        {% for foo in if_completed %}
+                            {% if foo.lesson.pk == lesson.pk %}
+                                <span class="badge badge-success non-visible" id="{{ lesson.pk }}">Completed</span>
+                                <script>
+                                    document.getElementById('{{ lesson.pk }}').classList.remove('non-visible');
+                                </script>
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
-
-
-
-
-
-

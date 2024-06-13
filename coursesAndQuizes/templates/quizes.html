@@ -1,20 +1,49 @@
 {% extends 'base.html' %}
 {% block title %}
-	Quiz Results
+    Quizes
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/quizes.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .quiz {
+            background-color: #343a40;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .quiz a {
+            color: #5e9447;
+            text-decoration: none;
+            font-size: 2em;
+        }
+        .quiz p {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+    </style>
 {% endblock %}
 {% block body %}
-    <div class="quiz-container">
-        {% for quiz in quizes %}
-            <div class="quiz">
-                <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}<br>{{ quiz.difficulty }}</a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="quiz-container">
+                {% for quiz in quizes %}
+                    <div class="quiz">
+                        <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}</a>
+                        <p>{{ quiz.difficulty }}</p>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
+</div>
 {% endblock %}
-
-
-
