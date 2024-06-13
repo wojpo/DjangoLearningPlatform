@@ -4,21 +4,69 @@
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/courses.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .course {
+            background-color: #343a40;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .course a {
+            color: #5e9447;
+            text-decoration: none;
+            font-size: 2em;
+        }
+        .course p {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: conic-gradient(#5e9447 0%, #324927 0%);
+            margin-right: 10px;
+        }
+        .status {
+            padding-top: 5px;
+        }
+    </style>
 {% endblock %}
 {% block body %}
-    <div class="course-container">
-        {% for course in courses %}
-            <div class="course">
-                <a href="{% url 'course-detail' pk=course.pk %}">{{ course.name }}</a>
-                <p>{{ course.difficulty }}</p>
-                <p id="comp-uncomp-{{ course.pk }}" class="status"></p>
-                <div id="progress-circle-{{ course.pk }}" class="progress-circle"></div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="course-container">
+                    {% for course in courses %}
+                        <div class="course">
+                            <a href="{% url 'course-detail' pk=course.pk %}">{{ course.name }}</a>
+                            <p>{{ course.difficulty }}</p>
+                            <div class="status-container">
+                                <div id="progress-circle-{{ course.pk }}" class="progress-circle"></div>
+                                <p id="comp-uncomp-{{ course.pk }}" class="status"></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
 
-    <script>
+
+<script>
         document.addEventListener("DOMContentLoaded", function() {
             let complessons;
             let completedUncompletedCounter;
@@ -42,4 +90,3 @@
         });
     </script>
 {% endblock %}
-

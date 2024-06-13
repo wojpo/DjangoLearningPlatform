@@ -10,8 +10,8 @@ from django.views.generic import DetailView
 
 @login_required(login_url='/loginpage')
 def overview(request):
-    cour = Course.objects.all()[:5]
-    quiz = Quiz.objects.all()[:5]
+    cour = Course.objects.all()[:8]
+    quiz = Quiz.objects.all()[:8]
     courc = Course.objects.count()
     quizc = Quiz.objects.count()
 

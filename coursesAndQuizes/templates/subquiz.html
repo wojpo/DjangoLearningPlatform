@@ -1,10 +1,56 @@
 {% extends 'base.html' %}
 {% block title %}
-	Quiz
+    Quiz
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/subquiz.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .container {
+            background-color: #343a40;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #5e9447;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        label {
+            color: #ffffff;
+        }
+        input[type="submit"] {
+            background-color: #5e9447;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #324927;
+        }
+        .error-message {
+            margin-top: 20px;
+            background-color: #ff6347;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .error-message p {
+            color: #ffffff;
+            margin: 0;
+        }
+    </style>
 {% endblock %}
 {% block body %}
 <div class="container">
@@ -17,10 +63,10 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
-</div>
     {% if error_message %}
         <div class="error-message">
             <p><strong>{{ error_message }}</strong></p>
         </div>
     {% endif %}
+</div>
 {% endblock %}

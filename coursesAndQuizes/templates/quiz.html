@@ -1,22 +1,43 @@
 {% extends 'base.html' %}
 {% block title %}
-	Quiz
+    Quiz
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/quiz.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+            background-color: #343a40;
+            padding: 40px;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+        h1 {
+            color: #5e9447;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #5e9447;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #4b7a36;
+        }
+    </style>
 {% endblock %}
 {% block body %}
-    <div class="container">
-        <h1>{{ quiz.title }}</h1>
-        <p>{{ quiz.description }}</p>
-        <p>{{ difficulty }}</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Start Quiz</button>
-        </form>
-    </div>
+<div class="container">
+    <h1>{{ quiz.title }}</h1>
+    <p>{{ quiz.description }}</p>
+    <p>{{ difficulty }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn">Start Quiz</button>
+    </form>
+</div>
 {% endblock %}
-
-
-

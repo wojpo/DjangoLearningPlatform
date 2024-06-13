@@ -1,34 +1,74 @@
 {% extends 'base.html' %}
 {% block title %}
-	Overview
+    Overview
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/overview.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .mini-title {
+            color: #5e9447;
+            margin-top: 30px;
+        }
+        .count {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        .container a{
+            text-decoration: none;
+        }
+        .course-container, .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .course, .quiz {
+            background-color: #343a40;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s;
+        }
+        .course:hover, .quiz:hover {
+            transform: scale(1.05);
+        }
+        .course p, .quiz p {
+            color: #ffffff;
+        }
+
+    </style>
 {% endblock %}
 {% block body %}
-	<h2 class="mini-title">Courses</h2>
-    <a href="{% url 'courses' %}"><p class="count">Click here to see {{ courses_count }} more courses </p></a>
+<div class="container mt-5">
+    <h2 class="mini-title text-center">Courses</h2>
+    <a href="{% url 'courses' %}">
+        <p class="count text-center">Click here to see {{ courses_count }} more courses</p>
+    </a>
     <div class="course-container">
         {% for course in courses %}
             <a href="{% url 'course-detail' course.pk %}">
-            <div class="course">
-                <p><strong>{{ course.name }}</strong><br>{{ course.difficulty }}</p>
-            </div>
+                <div class="course">
+                    <p><strong>{{ course.name }}</strong><br>{{ course.difficulty }}</p>
+                </div>
             </a>
         {% endfor %}
     </div>
-    <h2 class="mini-title">Quizes</h2>
-    <a href="{% url 'quizes' %}"><p class="count">Click here to see {{ quizes_count }} more quizes</p></a>
+    <h2 class="mini-title text-center mt-5">Quizes</h2>
+    <a href="{% url 'quizes' %}">
+        <p class="count text-center">Click here to see {{ quizes_count }} more quizes</p>
+    </a>
     <div class="quiz-container">
         {% for quiz in quizes %}
             <a href="{% url 'quiz-detail' quiz.pk %}">
-            <div class="quiz">
-                <p><strong>{{ quiz.title }}</strong><br>{{ quiz.difficulty }}</p>
-            </div>
+                <div class="quiz">
+                    <p><strong>{{ quiz.title }}</strong><br>{{ quiz.difficulty }}</p>
+                </div>
             </a>
         {% endfor %}
     </div>
+</div>
 {% endblock %}
-
-

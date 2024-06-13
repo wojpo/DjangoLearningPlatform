@@ -4,24 +4,28 @@
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/lesson.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 {% block body %}
-    <h1>{{ lesson.title }}</h1>
-    <p>{{ lesson.content }}</p>
-    {% for sublesson in sublessons %}
-        <h2>{{ sublesson.title }}</h2>
-        <p>{{ sublesson.content }}</p>
-    {% endfor %}
-    {% if completed %}
-        <p>This lesson is completed!</p>
-    {% else %}
-        <p>uncompleted</p>
-        <form method="post" action="{% url 'mark_lesson_complete' lesson.id %}">
-            {% csrf_token %}
-            <button type="submit">Mark as Completed</button>
-        </form>
-    {% endif %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-white">{{ lesson.title }}</h1>
+            <p class="text-white">{{ lesson.content }}</p>
+            {% for sublesson in sublessons %}
+                <h2 class="text-white">{{ sublesson.title }}</h2>
+                <p class="text-white">{{ sublesson.content }}</p>
+            {% endfor %}
+            {% if completed %}
+                <p class="text-success">This lesson is completed!</p>
+            {% else %}
+                <p class="text-danger">Uncompleted</p>
+                <form method="post" action="{% url 'mark_lesson_complete' lesson.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Mark as Completed</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
-
-

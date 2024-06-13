@@ -1,10 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}
-	Quiz Results
+    Quiz Results
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/coursesAndQuizes/result.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+            background-color: #343a40;
+            padding: 40px;
+            border-radius: 10px;
+            color: #ffffff;
+            text-align: center;
+        }
+        h1 {
+            color: #5e9447;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #5e9447;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 {% endblock %}
 {% block body %}
 <div class="container">
