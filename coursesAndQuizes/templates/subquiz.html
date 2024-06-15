@@ -68,5 +68,13 @@
             <p><strong>{{ error_message }}</strong></p>
         </div>
     {% endif %}
+
+    <script type="text/javascript">
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+            alert("Back navigation is disabled during the quiz.");
+        };
+    </script>
 </div>
 {% endblock %}
