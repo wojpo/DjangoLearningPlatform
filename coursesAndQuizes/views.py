@@ -19,6 +19,26 @@ def overview(request):
                   {'courses': cour, 'quizes': quiz, 'courses_count': courc, 'quizes_count': quizc})
 
 
+@login_required(login_url='/loginpage')
+def courses(request):
+    all_courses = Course.objects.all()
+    if_user_completed = {}
+    user = request.user
+    for course in all_courses:
+        for lesson in course.lesson_set.all():
+            if UserLesson.objects.filter(user=user, lesson=lesson).exists():
+                UwU = UserLesson.objects.get(user=user, lesson=lesson)
+                if_user_completed[lesson.pk] = UwU.completed
+
+    return render(request, 'courses.html', {'courses': all_courses, 'if_completed': if_user_completed})
+
+
+@login_required(login_url='/loginpage')
+def quizes(request):
+    all_quizes = Quiz.objects.all()
+    return render(request, 'quizes.html', {'quizes': all_quizes})
+
+
 class CourseDetailView(DetailView):
     @method_decorator(login_required(login_url='/loginpage'))
     def get(self, request, pk):
@@ -63,9 +83,13 @@ class QuizDetailView(DetailView):
     @method_decorator(login_required(login_url='/loginpage'))
     def post(self, request, pk):
         quiz = get_object_or_404(Quiz, pk=pk)
+
+        # Reset session variables
         request.session['quiz_id'] = quiz.id
         request.session['current_question'] = 0
         request.session['correct_answers'] = 0
+        request.session['answered_questions'] = []
+
         first_subquiz = SubQuiz.objects.filter(quiz=quiz).first()
 
         if first_subquiz:
@@ -84,30 +108,20 @@ class SubQuizDetailView(DetailView):
 
 
 @login_required(login_url='/loginpage')
-def courses(request):
-    all_courses = Course.objects.all()
-    if_user_completed = {}
-    user = request.user
-    for course in all_courses:
-        for lesson in course.lesson_set.all():
-            if UserLesson.objects.filter(user=user, lesson=lesson).exists():
-                UwU = UserLesson.objects.get(user=user, lesson=lesson)
-                if_user_completed[lesson.pk] = UwU.completed
-
-    return render(request, 'courses.html', {'courses': all_courses, 'if_completed': if_user_completed})
-
-
-@login_required(login_url='/loginpage')
-def quizes(request):
-    all_quizes = Quiz.objects.all()
-    return render(request, 'quizes.html', {'quizes': all_quizes})
-
-
-@login_required(login_url='/loginpage')
 def vote(request, quiz_pk, pk):
     subquiz = get_object_or_404(SubQuiz, pk=pk, quiz_id=quiz_pk)
     quiz = get_object_or_404(Quiz, pk=quiz_pk)
     sub_quizzes = SubQuiz.objects.filter(quiz=quiz)
+
+    if 'answered_questions' not in request.session:
+        request.session['answered_questions'] = []
+
+    if pk in request.session['answered_questions']:
+        return render(request, 'subquiz.html', {
+            'subquiz': subquiz,
+            'answers': Answer.objects.filter(subQuiz=subquiz),
+            'error_message': "You have already answered this question.",
+        })
 
     if request.method == 'POST':
         try:
@@ -127,6 +141,10 @@ def vote(request, quiz_pk, pk):
 
         current_question = request.session.get('current_question', 0) + 1
         request.session['current_question'] = current_question
+
+        # Mark this question as answered
+        request.session['answered_questions'].append(pk)
+        request.session.modified = True
 
         if current_question >= len(sub_quizzes):
             return redirect('results', quiz_pk=quiz_pk)
