@@ -1,9 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}
-	already_logged_in
+	Already Logged In
 {% endblock %}
-{% block navbar %}none{% endblock %}
+{% load static %}
+{% block stylesheet %}
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+        .container {
+            text-align: center;
+            background-color: #333;
+            padding: 30px;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            color: #ddd;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        a.btn {
+            background-color: #5e9447;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        a.btn:hover {
+            background-color: #324927;
+        }
+    </style>
+{% endblock %}
 {% block body %}
-    <p>You're already logged in press button to log out</p>
-    <a href="{% url 'logout' %}">LOG OUT</a>
+    <div class="content-wrapper">
+        <div class="container">
+            <p>You're already logged in. Press the button to log out.</p>
+            <a href="{% url 'logout' %}" class="btn">LOG OUT</a>
+        </div>
+    </div>
 {% endblock %}

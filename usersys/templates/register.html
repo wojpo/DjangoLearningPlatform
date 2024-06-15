@@ -1,19 +1,78 @@
 {% extends 'base.html' %}
 {% block title %}
-	Register
+    Register
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{% static 'css/usersys/registerpage.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .navbar {
+            display: none;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        form {
+            width: 100%;
+        }
+        label {
+            /* Add custom styles for labels if needed */
+        }
+        #id_username_helptext {
+            display: none;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            background-color: #444;
+            color: #ddd;
+            border: 1px solid #555;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+            background-color: #555;
+            border-color: #777;
+        }
+        input[type="submit"] {
+            background-color: #5e9447;
+            color: #fff;
+        }
+        input[type="submit"]:hover {
+            background-color: #324927;
+        }
+        table {
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            text-align: left;
+            width: 25%;
+        }
+        td {
+            width: 75%;
+        }
+    </style>
 {% endblock %}
 {% block navbar %}none{% endblock %}
 {% block body %}
-    <form class="container" method="post" autocomplete="off">
-        {% csrf_token %}
-        {{ registration_form.as_table }}
-        <input class="btn" type="submit" value="Register"/>
-    </form>
+    <div class="wrapper">
+        <form class="container" method="post" autocomplete="off">
+            {% csrf_token %}
+            {{ registration_form.as_table }}
+            <input class="btn btn-primary" type="submit" value="Register"/>
+        </form>
+    </div>
 {% endblock %}
-
-
-
