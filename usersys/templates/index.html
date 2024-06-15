@@ -4,19 +4,61 @@
 {% endblock %}
 {% load static %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'css/usersys/homepage.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
-{% endblock %}
-{% block navbar %}none{% endblock %}
-{% block body %}
-	<div class="container">
-        <div class="title-container">
-            <p class="title">WELCOME TO THE<br><span>SITE</span></p>
-        </div>
-        <div class="links-container">
-            <a class="links" href={% url 'login' %}>LOG IN</a>
-            <a class="links" href={% url 'register' %}>SIGN UP</a>
-        </div>
-    </div>
-{% endblock %}
+    <style>
+        body {
+            color: #ffffff;
+            font-family: 'Concert One', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .title-container {
+            margin-bottom: 50px;
+        }
+        .title {
+            font-size: 3em;
+            margin: 0;
+        }
+        .title span {
+            color: #5e9447;
+        }
+        .links-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .links {
+            background-color: #5e9447;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .links:hover {
+            background-color: #324927;
+        }
 
+        .navbar{
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="title-container">
+        <p class="title">WELCOME TO THE<br><span>SITE</span></p>
+    </div>
+    <div class="links-container">
+        <a class="links" href="{% url 'login' %}">LOG IN</a>
+        <a class="links" href="{% url 'register' %}">SIGN UP</a>
+    </div>
+</div>
+{% endblock %}
