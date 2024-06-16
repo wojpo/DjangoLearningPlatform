@@ -57,7 +57,17 @@ def login_page(request):
 
 @login_required(login_url='login')
 def user_settings(request):
-    return render(request, 'user_settings.html')
+    user = request.user
+    username = user.username
+    email = user.email
+
+    return render(request, 'user_settings.html', {'username': username, 'email': email})
+
+
+def account_delete(request):
+    user = request.user
+    user.delete()
+    return redirect('home')
 
 
 def user_logout(request):
