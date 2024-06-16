@@ -2,9 +2,19 @@
 {% block title %}
     {{ course.name }}
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .easy {
+            color: #5e9447;
+        }
+        .medium {
+            color: #d4d40d;
+        }
+        .hard {
+            color: #d44b4b;
+        }
+    </style>
 {% endblock %}
 {% block body %}
 <div class="container mt-5">
@@ -12,7 +22,9 @@
         <div class="col">
             <h1 class="display-4 text-white">{{ course.name }}</h1>
             <p class="lead text-white">{{ course.description }}</p>
-            <p class="font-weight-bold text-white">{{ difficulty }}</p>
+            <p class="font-weight-bold {% if course.difficulty == 'Easy' %}easy{% elif course.difficulty == 'Medium' %}medium{% elif course.difficulty == 'Hard' %}hard{% endif %}">
+                {{ course.difficulty }}
+            </p>
             <ul class="list-group">
                 {% for lesson in lessons %}
                     <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">

@@ -2,7 +2,6 @@
 {% block title %}
     Register
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -22,15 +21,11 @@
         .container {
             max-width: 600px;
             padding: 20px;
-            background-color: #333;
+            background-color: #2a2a2a;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         form {
             width: 100%;
-        }
-        label {
-            /* Add custom styles for labels if needed */
         }
         #id_username_helptext {
             display: none;

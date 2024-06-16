@@ -6,9 +6,9 @@ class Course(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
-    EASY = 'easy'
-    MEDIUM = 'medium'
-    HARD = 'hard'
+    EASY = 'Easy'
+    MEDIUM = 'Medium'
+    HARD = 'Hard'
 
     DIFFICULTY_CHOICES = [
         (EASY, 'Easy'),
@@ -48,9 +48,9 @@ class Quiz(models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
-    EASY = 'easy'
-    MEDIUM = 'medium'
-    HARD = 'hard'
+    EASY = 'Easy'
+    MEDIUM = 'Medium'
+    HARD = 'Hard'
 
     DIFFICULTY_CHOICES = [
         (EASY, 'Easy'),
