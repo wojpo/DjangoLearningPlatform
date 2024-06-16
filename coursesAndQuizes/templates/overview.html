@@ -2,12 +2,9 @@
 {% block title %}
     Overview
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'css/coursesAndQuizes/overview.css' %}">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <style>
-
         .mini-title {
             color: #5e9447;
             margin-top: 30px;
@@ -39,7 +36,15 @@
         .course p, .quiz p {
             color: #ffffff;
         }
-
+        .easy {
+            color: #5e9447;
+        }
+        .medium {
+            color: #d4d40d;
+        }
+        .hard {
+            color: #d44b4b;
+        }
     </style>
 {% endblock %}
 {% block body %}
@@ -52,7 +57,11 @@
         {% for course in courses %}
             <a href="{% url 'course-detail' course.pk %}">
                 <div class="course">
-                    <p><strong>{{ course.name }}</strong><br>{{ course.difficulty }}</p>
+                    <p><strong>{{ course.name }}</strong><br>
+                    <span class="{% if course.difficulty == 'Easy' %}easy{% elif course.difficulty == 'Medium' %}medium{% elif course.difficulty == 'Hard' %}hard{% endif %}">
+                        {{ course.difficulty }}
+                    </span>
+                    </p>
                 </div>
             </a>
         {% endfor %}
@@ -65,7 +74,11 @@
         {% for quiz in quizes %}
             <a href="{% url 'quiz-detail' quiz.pk %}">
                 <div class="quiz">
-                    <p><strong>{{ quiz.title }}</strong><br>{{ quiz.difficulty }}</p>
+                    <p><strong>{{ quiz.title }}</strong><br>
+                    <span class="{% if quiz.difficulty == 'Easy' %}easy{% elif quiz.difficulty == 'Medium' %}medium{% elif quiz.difficulty == 'Hard' %}hard{% endif %}">
+                        {{ quiz.difficulty }}
+                    </span>
+                    </p>
                 </div>
             </a>
         {% endfor %}

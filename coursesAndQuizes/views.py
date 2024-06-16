@@ -46,10 +46,9 @@ class CourseDetailView(DetailView):
         lessons = Lesson.objects.filter(course=course)
         if_completed = UserLesson.objects.filter(lesson__course=course)
         lessons_num = len(lessons)
-        diff = course.difficulty
 
         return render(request, 'course.html', {'course': course, 'lessons': lessons, 'lessons_count': lessons_num,
-                                               'if_completed': if_completed, 'difficulty': diff})
+                                               'if_completed': if_completed})
 
 
 class LessonDetailView(DetailView):

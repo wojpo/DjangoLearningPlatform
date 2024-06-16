@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}
-    Quiz
+    {{ quiz.title }}
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -28,13 +27,24 @@
         .btn:hover {
             background-color: #4b7a36;
         }
+        .easy {
+            color: #5e9447;
+        }
+        .medium {
+            color: #d4d40d;
+        }
+        .hard {
+            color: #d44b4b;
+        }
     </style>
 {% endblock %}
 {% block body %}
 <div class="container">
     <h1>{{ quiz.title }}</h1>
     <p>{{ quiz.description }}</p>
-    <p>{{ difficulty }}</p>
+    <p class="{% if quiz.difficulty == 'Easy' %}easy{% elif quiz.difficulty == 'Medium' %}medium{% elif quiz.difficulty == 'Hard' %}hard{% endif %}">
+        {{ quiz.difficulty }}
+    </p>
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn">Start Quiz</button>

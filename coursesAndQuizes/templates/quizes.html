@@ -2,7 +2,6 @@
 {% block title %}
     Quizes
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -21,13 +20,21 @@
             width: 300px;
         }
         .quiz a {
-            color: #5e9447;
+            color: #ffffff;
             text-decoration: none;
             font-size: 2em;
         }
         .quiz p {
-            color: #ffffff;
             margin-bottom: 10px;
+        }
+        .easy {
+            color: #5e9447;
+        }
+        .medium {
+            color: #d4d40d;
+        }
+        .hard {
+            color: #d44b4b;
         }
     </style>
 {% endblock %}
@@ -39,7 +46,7 @@
                 {% for quiz in quizes %}
                     <div class="quiz">
                         <a href="{% url 'quiz-detail' pk=quiz.pk %}">{{ quiz.title }}</a>
-                        <p>{{ quiz.difficulty }}</p>
+                        <p class="{% if quiz.difficulty == 'Easy' %}easy{% elif quiz.difficulty == 'Medium' %}medium{% elif quiz.difficulty == 'Hard' %}hard{% endif %} ">{{ quiz.difficulty }}</p>
                     </div>
                 {% endfor %}
             </div>

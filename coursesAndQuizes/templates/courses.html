@@ -2,7 +2,6 @@
 {% block title %}
     Courses
 {% endblock %}
-{% load static %}
 {% block stylesheet %}
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -20,13 +19,21 @@
             width: 300px;
         }
         .course a {
-            color: #5e9447;
+            color: #ffffff;
             text-decoration: none;
             font-size: 2em;
         }
         .course p {
-            color: #ffffff;
             margin-bottom: 10px;
+        }
+        .easy {
+            color: #5e9447;
+        }
+        .medium {
+            color: #d4d40d;
+        }
+        .hard {
+            color: #d44b4b;
         }
         .status-container {
             display: flex;
@@ -53,7 +60,9 @@
                     {% for course in courses %}
                         <div class="course">
                             <a href="{% url 'course-detail' pk=course.pk %}">{{ course.name }}</a>
-                            <p>{{ course.difficulty }}</p>
+                            <p class="{% if course.difficulty == 'Easy' %}easy{% elif course.difficulty == 'Medium' %}medium{% elif course.difficulty == 'Hard' %}hard{% endif %}">
+                                {{ course.difficulty }}
+                            </p>
                             <div class="status-container">
                                 <div id="progress-circle-{{ course.pk }}" class="progress-circle"></div>
                                 <p id="comp-uncomp-{{ course.pk }}" class="status"></p>
@@ -65,13 +74,12 @@
         </div>
     </div>
 
-
-<script>
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
             let complessons;
             let completedUncompletedCounter;
-            let progressCircle
-            let progression
+            let progressCircle;
+            let progression;
             {% for course in courses %}
                 complessons = 0;
                 {% for lesson in course.lesson_set.all %}
@@ -84,8 +92,8 @@
                 progression = ((complessons / {{ course.lesson_set.all.count }}) * 100).toFixed(0);
                 completedUncompletedCounter = document.getElementById("comp-uncomp-{{ course.pk }}");
                 completedUncompletedCounter.textContent = `${progression}% Completed`;
-                progressCircle =  document.getElementById('progress-circle-{{ course.pk }}')
-                progressCircle.style.background =  `conic-gradient(#324927 ${100 - progression}%, #5e9447 ${100 - progression}% 100%)`;
+                progressCircle = document.getElementById('progress-circle-{{ course.pk }}');
+                progressCircle.style.background = `conic-gradient(#324927 ${100 - progression}%, #5e9447 ${100 - progression}% 100%)`;
             {% endfor %}
         });
     </script>
